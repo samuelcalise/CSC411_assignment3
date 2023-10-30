@@ -15,7 +15,7 @@ fn main() {
 
     let init_img = Array2::new_array(img.pixels.clone(), img.width as usize, img.height as usize);
 
-    let rotated_img = rotate_180(&init_img);
+    let rotated_img = rotate_colmajor_180(&init_img);
 
     let rotated_image = RgbImage {
         width: rotated_img.width as u32,
@@ -30,7 +30,7 @@ fn main() {
 fn rotate_colmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
     let mut rotated_data = Vec::new();
 
-    for (row, col, pixel) in input_image.iter_col_major(){
+    for (col, row, pixel) in input_image.iter_col_major(){
         let pixel = input_image.get_element(input_image.height - row - 1, col);
         rotated_data.push(Rgb {
             red: pixel.red,
@@ -56,6 +56,11 @@ fn rotate_rowmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
     }
 
     Array2::new_array(rotated_data, input_image.height, input_image.width)
+}
+
+fn rotate_colmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
+    let first_rotation = rotate_colmajor_90(input_image);
+    rotate_colmajor_90(&first_rotation)
 }
 
 fn rotate_rowmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {

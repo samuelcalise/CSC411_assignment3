@@ -1,6 +1,9 @@
-use csc411_image::{Read, RgbImage, Rgb};
+use csc411_image::{Read};
+use csc411_image::RgbImage;
 use std::io;
 use array2::Array2;
+use csc411_image::Write;
+use csc411_image::Rgb;
 
 fn main() {
     let mut input = String::new();
@@ -10,18 +13,33 @@ fn main() {
 
     let img = RgbImage::read(Some(trimmed_input)).unwrap();
 
-    let mut v = Vec::new();
+    let init_img = Array2::new_array(img.pixels.clone(), img.width as usize, img.height as usize); // Clone the pixel data
 
-    for elements in &img.pixels {
-        v.push((elements.red as usize, elements.green as usize, elements.blue as usize));
+    let rotated_img = rotate_90(&init_img);
+
+    let rotated_image = RgbImage {
+        width: img.height,
+        height: img.width,
+        denominator: img.denominator,
+        pixels: rotated_img.vec_of_val,
+    };
+
+    rotated_image.write(Some("output.ppm"));
+}
+
+fn rotate_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
+    let mut rotated_data = Vec::new();
+
+    for col in 0..input_image.width {
+        for row in (0..input_image.height).rev() {
+            let pixel = input_image.get_element(row, col);
+            rotated_data.push(Rgb {
+                red: pixel.red,
+                green: pixel.green,
+                blue: pixel.blue,
+            });
+        }
     }
 
-    let init_img = Array2::new(img.width as usize, img.height as usize, img.pixels);
-
-    // Calculate the dimensions for the rotated image
-    let rotated_width = init_img.height();
-    let rotated_height = init_img.width();
-
-    // Create a new vector for the rotated image
-    let mut updated_vec: Vec<Rgb> = vec![Rgb { red: 0, green: 0, blue: 0 }; rotated_width * rotated_height];
+    Array2::new_array(rotated_data, input_image.height, input_image.width)
 }

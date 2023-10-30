@@ -62,7 +62,7 @@ fn main() {
                     denominator: img.denominator,
                     pixels: rotated_img.vec_of_val,
                 };
-                rotated_image.write(Some("output.ppm")).unwrap();
+                rotated_image.write(None).unwrap();
             }
             Some(180) => {
                 let rotated_img = rotate_rowmajor_180(&init_img);
@@ -82,7 +82,7 @@ fn main() {
         }
     }    
 
-    // let rotated_img = rotate_colmajor_180(&init_img);
+    // let rotated_img = rotate_rowmajor_90(&init_img);
 
     // let rotated_image = RgbImage {
     //     width: rotated_img.width as u32,

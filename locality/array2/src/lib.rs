@@ -111,6 +111,10 @@ impl<T: Clone> Array2<T> {
         self.width
     }
 
+    pub fn get_data(&self) -> &Vec<T> {
+        &self.data
+    }
+
     /// Returns an immutable reference to the element at the given `column` and `row`
     /// as long as that index is in bounds
     /// (wrapped in [`Some`]). Returns [`None`] if out of bounds.

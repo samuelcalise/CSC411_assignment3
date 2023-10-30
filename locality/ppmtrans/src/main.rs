@@ -1,33 +1,27 @@
-#[warn(unused_imports)]
 use csc411_image::{Read, RgbImage, Rgb};
-#[warn(unused_imports)]
+use std::io;
 use array2::Array2;
-use clap::Parser;
-
-#[derive(Parser, Debug)]
-#[clap(author, version, about, long_about = None)]
-
-struct Args {
-    // Flip
-    #[clap(long = "flip", required = false)]
-    flip: Option<String>,
-    //  Transpose
-    #[clap(long = "transpose")]
-    transpose: bool,
-    // Rotation
-    #[clap(short = 'r', long = "rotate")]
-    rotate: Option<u32>,
-    // Col Major Type
-    #[clap(long = "col-major")]
-    col_major: bool,
-    // Row Major Type
-    #[clap(long = "row-major")]
-    row_major: bool,
-    // File Input
-    #[clap()]
-    file_given: Option<String>,
-}
 
 fn main() {
-    println!("here");
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Failed to read line");
+
+    let trimmed_input = input.trim();
+
+    let img = RgbImage::read(Some(trimmed_input)).unwrap();
+
+    let mut v = Vec::new();
+
+    for elements in &img.pixels {
+        v.push((elements.red as usize, elements.green as usize, elements.blue as usize));
+    }
+
+    let init_img = Array2::new(img.width as usize, img.height as usize, img.pixels);
+
+    // Calculate the dimensions for the rotated image
+    let rotated_width = init_img.height();
+    let rotated_height = init_img.width();
+
+    // Create a new vector for the rotated image
+    let mut updated_vec: Vec<Rgb> = vec![Rgb { red: 0, green: 0, blue: 0 }; rotated_width * rotated_height];
 }

@@ -1,6 +1,6 @@
 use array2::Array2;
 use csc411_image::Rgb;
-
+use std::time::Instant;
 
 
 /// Function: Rotate Column Major 90
@@ -14,7 +14,8 @@ use csc411_image::Rgb;
 /// image for 90 degrees clockwise rotation in col_major iteration.
 pub fn rotate_colmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
     let mut rotated_data = Vec::new();
-
+    
+    // let now = Instant::now();
     for (col, row, _pixel) in input_image.iter_col_major(){
         let pixel = input_image.get_element(input_image.height - row - 1, col);
         rotated_data.push(Rgb {
@@ -23,6 +24,8 @@ pub fn rotate_colmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
             blue: pixel.blue,
         });
     }
+    // let elapsed = now.elapsed();
+    // eprintln!("{:.2?}", elapsed);
 
     Array2::new_array(rotated_data, input_image.height, input_image.width)
 }
@@ -38,7 +41,7 @@ pub fn rotate_colmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
 /// image for 90 degrees clockwise rotation in row_major iteration.
 pub fn rotate_rowmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
     let mut rotated_data = Vec::new();
-
+    // let now = Instant::now();
     for (row, col, _pixel) in input_image.iter_row_major(){
         let pixel = input_image.get_element(input_image.height - row - 1, col);
         rotated_data.push(Rgb {
@@ -47,7 +50,8 @@ pub fn rotate_rowmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
             blue: pixel.blue,
         });
     }
-
+    // let elapsed = now.elapsed();
+    // eprintln!("{:.2?}", elapsed);
     Array2::new_array(rotated_data, input_image.height, input_image.width)
 }
 
@@ -62,7 +66,7 @@ pub fn rotate_rowmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
 /// image for 180 degrees clockwise rotation in col_major iteration.
 pub fn rotate_colmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
     let mut rotated_data = Vec::new();
-
+    // let now = Instant::now();
     for (col, row, _pixel) in input_image.iter_row_major(){
         let pixel = input_image.get_element( input_image.height - row - 1, input_image.width - col - 1,);
         rotated_data.push(Rgb {
@@ -71,7 +75,8 @@ pub fn rotate_colmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
             blue: pixel.blue,
         });
     }
-
+    // let elapsed = now.elapsed();
+    // eprintln!("{:.2?}", elapsed);
     Array2::new_array(rotated_data, input_image.height, input_image.width)
 }
 
@@ -87,7 +92,7 @@ pub fn rotate_colmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
 pub fn rotate_rowmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
 
     let mut rotated_data = Vec::new();
-
+    // let now = Instant::now();
     for (row, col, _pixel) in input_image.iter_row_major(){
         let pixel = input_image.get_element( input_image.height - col - 1, input_image.width - row - 1,);
         rotated_data.push(Rgb {
@@ -96,6 +101,7 @@ pub fn rotate_rowmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
             blue: pixel.blue,
         });
     }
-
+    // let elapsed = now.elapsed();
+    // eprintln!("{:.2?}", elapsed);
     Array2::new_array(rotated_data, input_image.height, input_image.width)
 }

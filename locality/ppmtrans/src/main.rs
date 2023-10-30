@@ -9,6 +9,7 @@ use array2::Array2;
 mod thething;
 use thething::{rotate_colmajor_90, rotate_rowmajor_90, rotate_colmajor_180, rotate_rowmajor_180};
 use std::process;
+use std::time::Instant;
 
 /*
     Required Synatx for Clap

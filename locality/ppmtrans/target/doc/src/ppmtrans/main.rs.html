@@ -104,20 +104,10 @@
 <a href="#104" id="104">104</a>
 <a href="#105" id="105">105</a>
 <a href="#106" id="106">106</a>
-<a href="#107" id="107">107</a>
-<a href="#108" id="108">108</a>
-<a href="#109" id="109">109</a>
-<a href="#110" id="110">110</a>
-<a href="#111" id="111">111</a>
-<a href="#112" id="112">112</a>
-<a href="#113" id="113">113</a>
-<a href="#114" id="114">114</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>csc411_image::Read;
 <span class="kw">use </span>csc411_image::RgbImage;
 <span class="kw">use </span>csc411_image::Write;
-<span class="kw">use </span>csc411_image::Rgb;
 <span class="kw">use </span>clap::Parser;
-<span class="kw">use </span>std::io;
 <span class="kw">use </span>array2::Array2;
 <span class="kw">mod </span>thething;
 <span class="kw">use </span>thething::{rotate_colmajor_90, rotate_rowmajor_90, rotate_colmajor_180, rotate_rowmajor_180};
@@ -127,12 +117,7 @@
 #[clap(author, version, about, long_about = <span class="prelude-val">None</span>)]
 
 </span><span class="kw">struct </span>Args {
-    <span class="comment">// Flip
-    </span><span class="attr">#[clap(long = <span class="string">&quot;flip&quot;</span>, required = <span class="bool-val">false</span>)]
-    </span>flip: <span class="prelude-ty">Option</span>&lt;String&gt;,
-    <span class="comment">//  Transpose
-    </span><span class="attr">#[clap(long = <span class="string">&quot;transpose&quot;</span>)]
-    </span>transpose: bool,
+
     <span class="comment">// Rotation
     </span><span class="attr">#[clap(short = <span class="string">&#39;r&#39;</span>, long = <span class="string">&quot;rotate&quot;</span>)]
     </span>rotate: <span class="prelude-ty">Option</span>&lt;u32&gt;,
@@ -144,7 +129,7 @@
     </span>row_major: bool,
     <span class="comment">// File Input
     </span><span class="attr">#[clap()]
-    </span>file_given: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    </span>file_name: <span class="prelude-ty">Option</span>&lt;String&gt;,
 
 }
 
@@ -155,10 +140,9 @@
     <span class="kw">let </span>rotate = args.rotate;
     <span class="kw">let </span>col_major = args.col_major;
     <span class="kw">let </span>row_major = args.row_major;
-    <span class="kw">let </span>flip = args.flip;
-    <span class="kw">let </span>transpose = args.transpose;
 
-    <span class="kw">let </span>input = args.file_given;
+
+    <span class="kw">let </span>input = args.file_name;
     <span class="kw">let </span>img = RgbImage::read(input.as_deref()).unwrap();
 
     <span class="kw">let </span>init_img = Array2::new_array(img.pixels.clone(), img.width <span class="kw">as </span>usize, img.height <span class="kw">as </span>usize);

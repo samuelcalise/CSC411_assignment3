@@ -69,19 +69,54 @@
 <a href="#69" id="69">69</a>
 <a href="#70" id="70">70</a>
 <a href="#71" id="71">71</a>
+<a href="#72" id="72">72</a>
+<a href="#73" id="73">73</a>
+<a href="#74" id="74">74</a>
+<a href="#75" id="75">75</a>
+<a href="#76" id="76">76</a>
+<a href="#77" id="77">77</a>
+<a href="#78" id="78">78</a>
+<a href="#79" id="79">79</a>
+<a href="#80" id="80">80</a>
+<a href="#81" id="81">81</a>
+<a href="#82" id="82">82</a>
+<a href="#83" id="83">83</a>
+<a href="#84" id="84">84</a>
+<a href="#85" id="85">85</a>
+<a href="#86" id="86">86</a>
+<a href="#87" id="87">87</a>
+<a href="#88" id="88">88</a>
+<a href="#89" id="89">89</a>
+<a href="#90" id="90">90</a>
+<a href="#91" id="91">91</a>
+<a href="#92" id="92">92</a>
+<a href="#93" id="93">93</a>
+<a href="#94" id="94">94</a>
+<a href="#95" id="95">95</a>
+<a href="#96" id="96">96</a>
+<a href="#97" id="97">97</a>
+<a href="#98" id="98">98</a>
+<a href="#99" id="99">99</a>
+<a href="#100" id="100">100</a>
+<a href="#101" id="101">101</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>array2::Array2;
-<span class="kw">use </span>csc411_image::Read;
-<span class="kw">use </span>csc411_image::RgbImage;
-<span class="kw">use </span>csc411_image::Write;
 <span class="kw">use </span>csc411_image::Rgb;
-<span class="kw">use </span>clap::Parser;
-<span class="kw">use </span>std::io;
 
-<span class="doccomment">///col major 90
+
+
+<span class="doccomment">/// Function: Rotate Column Major 90
+///
+/// The invariant in this function is getting a pixel at a certain coordinate
+/// and &quot;pushing&quot; the pixel into an updated array2.
+///
+/// This function&#39;s parameter is taking the input image from the command line
+/// and references it&#39;s array2 1d vector. When iterating through the vector,
+/// the function will return an `array2&lt;Rgb&gt;` which is the expected rotated
+/// image for 90 degrees clockwise rotation in col_major iteration.
 </span><span class="kw">pub fn </span>rotate_colmajor_90(input_image: <span class="kw-2">&amp;</span>Array2&lt;Rgb&gt;) -&gt; Array2&lt;Rgb&gt; {
     <span class="kw">let </span><span class="kw-2">mut </span>rotated_data = Vec::new();
 
-    <span class="kw">for </span>(col, row, pixel) <span class="kw">in </span>input_image.iter_col_major(){
+    <span class="kw">for </span>(col, row, _pixel) <span class="kw">in </span>input_image.iter_col_major(){
         <span class="kw">let </span>pixel = input_image.get_element(input_image.height - row - <span class="number">1</span>, col);
         rotated_data.push(Rgb {
             red: pixel.red,
@@ -93,11 +128,19 @@
     Array2::new_array(rotated_data, input_image.height, input_image.width)
 }
 
-
-<span class="kw">pub fn </span>rotate_rowmajor_90(input_image: <span class="kw-2">&amp;</span>Array2&lt;Rgb&gt;) -&gt; Array2&lt;Rgb&gt; {
+<span class="doccomment">/// Function: Rotate Row Major 90
+///
+/// The invariant in this function is getting a pixel at a certain coordinate
+/// and &quot;pushing&quot; the pixel into an updated array2.
+///
+/// This function&#39;s parameter is taking the input image from the command line
+/// and references it&#39;s array2 1d vector. When iterating through the vector,
+/// the function will return an `array2&lt;Rgb&gt;` which is the expected rotated
+/// image for 90 degrees clockwise rotation in row_major iteration.
+</span><span class="kw">pub fn </span>rotate_rowmajor_90(input_image: <span class="kw-2">&amp;</span>Array2&lt;Rgb&gt;) -&gt; Array2&lt;Rgb&gt; {
     <span class="kw">let </span><span class="kw-2">mut </span>rotated_data = Vec::new();
 
-    <span class="kw">for </span>(row, col, pixel) <span class="kw">in </span>input_image.iter_row_major(){
+    <span class="kw">for </span>(row, col, _pixel) <span class="kw">in </span>input_image.iter_row_major(){
         <span class="kw">let </span>pixel = input_image.get_element(input_image.height - row - <span class="number">1</span>, col);
         rotated_data.push(Rgb {
             red: pixel.red,
@@ -109,11 +152,19 @@
     Array2::new_array(rotated_data, input_image.height, input_image.width)
 }
 
-
-<span class="kw">pub fn </span>rotate_colmajor_180(input_image: <span class="kw-2">&amp;</span>Array2&lt;Rgb&gt;) -&gt; Array2&lt;Rgb&gt; {
+<span class="doccomment">/// Function: Rotate Column Major 180
+///
+/// The invariant in this function is getting a pixel at a certain coordinate
+/// and &quot;pushing&quot; the pixel into an updated array2.
+///
+/// This function&#39;s parameter is taking the input image from the command line
+/// and references it&#39;s array2 1d vector. When iterating through the vector,
+/// the function will return an `array2&lt;Rgb&gt;` which is the expected rotated
+/// image for 180 degrees clockwise rotation in col_major iteration.
+</span><span class="kw">pub fn </span>rotate_colmajor_180(input_image: <span class="kw-2">&amp;</span>Array2&lt;Rgb&gt;) -&gt; Array2&lt;Rgb&gt; {
     <span class="kw">let </span><span class="kw-2">mut </span>rotated_data = Vec::new();
 
-    <span class="kw">for </span>(col, row, pixel) <span class="kw">in </span>input_image.iter_row_major(){
+    <span class="kw">for </span>(col, row, _pixel) <span class="kw">in </span>input_image.iter_row_major(){
         <span class="kw">let </span>pixel = input_image.get_element( input_image.height - row - <span class="number">1</span>, input_image.width - col - <span class="number">1</span>,);
         rotated_data.push(Rgb {
             red: pixel.red,
@@ -125,11 +176,20 @@
     Array2::new_array(rotated_data, input_image.height, input_image.width)
 }
 
-<span class="kw">pub fn </span>rotate_rowmajor_180(input_image: <span class="kw-2">&amp;</span>Array2&lt;Rgb&gt;) -&gt; Array2&lt;Rgb&gt; {
+<span class="doccomment">/// Function: Rotate Column Major 180
+///
+/// The invariant in this function is getting a pixel at a certain coordinate
+/// and &quot;pushing&quot; the pixel into an updated array2.
+///
+/// This function&#39;s parameter is taking the input image from the command line
+/// and references it&#39;s array2 1d vector. When iterating through the vector,
+/// the function will return an `array2&lt;Rgb&gt;` which is the expected rotated
+/// image for 180 degrees clockwise rotation in row_major iteration.
+</span><span class="kw">pub fn </span>rotate_rowmajor_180(input_image: <span class="kw-2">&amp;</span>Array2&lt;Rgb&gt;) -&gt; Array2&lt;Rgb&gt; {
 
     <span class="kw">let </span><span class="kw-2">mut </span>rotated_data = Vec::new();
 
-    <span class="kw">for </span>(row, col, pixel) <span class="kw">in </span>input_image.iter_row_major(){
+    <span class="kw">for </span>(row, col, _pixel) <span class="kw">in </span>input_image.iter_row_major(){
         <span class="kw">let </span>pixel = input_image.get_element( input_image.height - col - <span class="number">1</span>, input_image.width - row - <span class="number">1</span>,);
         rotated_data.push(Rgb {
             red: pixel.red,

@@ -1,9 +1,7 @@
 use csc411_image::Read;
 use csc411_image::RgbImage;
 use csc411_image::Write;
-use csc411_image::Rgb;
 use clap::Parser;
-use std::io;
 use array2::Array2;
 mod thething;
 use thething::{rotate_colmajor_90, rotate_rowmajor_90, rotate_colmajor_180, rotate_rowmajor_180};
@@ -13,12 +11,7 @@ use std::process;
 #[clap(author, version, about, long_about = None)]
 
 struct Args {
-    // Flip
-    #[clap(long = "flip", required = false)]
-    flip: Option<String>,
-    //  Transpose
-    #[clap(long = "transpose")]
-    transpose: bool,
+
     // Rotation
     #[clap(short = 'r', long = "rotate")]
     rotate: Option<u32>,
@@ -30,7 +23,7 @@ struct Args {
     row_major: bool,
     // File Input
     #[clap()]
-    file_given: Option<String>,
+    file_name: Option<String>,
 
 }
 
@@ -41,10 +34,9 @@ fn main() {
     let rotate = args.rotate;
     let col_major = args.col_major;
     let row_major = args.row_major;
-    let flip = args.flip;
-    let transpose = args.transpose;
 
-    let input = args.file_given;
+
+    let input = args.file_name;
     let img = RgbImage::read(input.as_deref()).unwrap();
 
     let init_img = Array2::new_array(img.pixels.clone(), img.width as usize, img.height as usize);

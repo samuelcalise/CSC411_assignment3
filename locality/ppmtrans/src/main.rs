@@ -59,6 +59,6 @@ fn rotate_rowmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
 }
 
 fn rotate_rowmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
-    let first_rotation = rotate_90(input_image);
-    rotate_90(&first_rotation)
+    let first_rotation = rotate_rowmajor_90(input_image);
+    rotate_rowmajor_90(&first_rotation)
 }

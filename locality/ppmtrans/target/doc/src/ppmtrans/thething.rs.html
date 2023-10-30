@@ -68,6 +68,7 @@
 <a href="#68" id="68">68</a>
 <a href="#69" id="69">69</a>
 <a href="#70" id="70">70</a>
+<a href="#71" id="71">71</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>array2::Array2;
 <span class="kw">use </span>csc411_image::Read;
 <span class="kw">use </span>csc411_image::RgbImage;
@@ -76,7 +77,8 @@
 <span class="kw">use </span>clap::Parser;
 <span class="kw">use </span>std::io;
 
-<span class="kw">pub fn </span>rotate_colmajor_90(input_image: <span class="kw-2">&amp;</span>Array2&lt;Rgb&gt;) -&gt; Array2&lt;Rgb&gt; {
+<span class="doccomment">///col major 90
+</span><span class="kw">pub fn </span>rotate_colmajor_90(input_image: <span class="kw-2">&amp;</span>Array2&lt;Rgb&gt;) -&gt; Array2&lt;Rgb&gt; {
     <span class="kw">let </span><span class="kw-2">mut </span>rotated_data = Vec::new();
 
     <span class="kw">for </span>(col, row, pixel) <span class="kw">in </span>input_image.iter_col_major(){

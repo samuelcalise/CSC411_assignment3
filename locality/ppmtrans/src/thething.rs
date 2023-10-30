@@ -6,6 +6,8 @@ use csc411_image::Rgb;
 use clap::Parser;
 use std::io;
 
+///col major 90
+///
 pub fn rotate_colmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
     let mut rotated_data = Vec::new();
 

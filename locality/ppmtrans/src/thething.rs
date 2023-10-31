@@ -1,6 +1,6 @@
 use array2::Array2;
 use csc411_image::Rgb;
-use std::time::Instant;
+//use std::time::Instant;
 
 
 /// Function: Rotate Column Major 90

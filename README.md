@@ -11,12 +11,11 @@ Our solution has a thething.rs file which includes all of our rotation functions
 
 ### Part C
 
-                 | Row-major access | Col-Major Access|
-*******************************************************
-|90-deg rotation |    XXXXms         |     74.37ms    |
-*******************************************************
-|180-deg rotation|     54.81ms       |     60.26ms    |
-*******************************************************
+|                  |Row-major      |Col-major |
+|------------------|---------------|----------|
+|90-deg rotation   |XXXXms         |74.37ms   |
+|180-deg rotation  |54.81ms        |60.26ms   |
+
 Our measurements are slightly different from our predictions we made in Part B.
 
 ### Part D

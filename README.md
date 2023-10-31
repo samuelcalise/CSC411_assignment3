@@ -2,7 +2,7 @@
 
 Sam Calise and Claudia Deverdits
 
-We received help from TAs Ayman, Vincent, and Oliver while implementing our solution. We would also like to note that we have opted to use an Array2 solution that is designed by students who have previously taken CSC 411 instead of using our own implementation. We believe we have correctly implemented rotate 90 and rotate 180, and have decided not to implement the extra credit options. 
+We received help from TAs Ayman, Vincent, and Oliver while implementing our solution. We would also like to note that we have opted to use an Array2 solution that is designed by students who have previously taken CSC 411 instead of using our own implementation. We believe we have correctly implemented rotate 90 and rotate 180 on perfect squares; however, we were unable to get our program working with images or other shapes (ie. moss.ppm).
 
 We have spent approximately 12 hours on this assignment.
 

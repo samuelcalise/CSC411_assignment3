@@ -42,14 +42,33 @@ pub fn rotate_colmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
 pub fn rotate_rowmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
     let mut rotated_data = Vec::new();
     // let now = Instant::now();
-    for (row, col, _pixel) in input_image.iter_row_major(){
-        let pixel = input_image.get_element(input_image.height - row - 1, col);
-        rotated_data.push(Rgb {
-            red: pixel.red,
-            green: pixel.green,
-            blue: pixel.blue,
-        });
+
+
+    if input_image.height == input_image.width //Assume sqaure
+    {
+        for (row, col, _pixel) in input_image.iter_row_major(){
+            // --> eprintln!("{},{}, {}",input_image.height, row, col);
+            let pixel = input_image.get_element(input_image.height - row - 1, col);
+            rotated_data.push(Rgb {
+                red: pixel.red,
+                green: pixel.green,
+                blue: pixel.blue,
+            });
+        }
     }
+    else //Assume Rectangle
+    {
+        for (col, row, _pixel) in input_image.iter_row_major(){
+            // --> eprintln!("{},{}, {}",input_image.height, row, col);
+            let pixel = input_image.get_element(input_image.width - col - 1, row);
+            rotated_data.push(Rgb {
+                red: pixel.red,
+                green: pixel.green,
+                blue: pixel.blue,
+            });
+        }
+    }
+    
     // let elapsed = now.elapsed();
     // eprintln!("{:.2?}", elapsed);
     Array2::new_array(rotated_data, input_image.height, input_image.width)
@@ -68,7 +87,7 @@ pub fn rotate_colmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
     let mut rotated_data = Vec::new();
     // let now = Instant::now();
     for (col, row, _pixel) in input_image.iter_row_major(){
-        let pixel = input_image.get_element( input_image.height - row - 1, input_image.width - col - 1,);
+        let pixel = input_image.get_element( input_image.height - row - 1, input_image.width - col - 1);
         rotated_data.push(Rgb {
             red: pixel.red,
             green: pixel.green,
@@ -92,15 +111,31 @@ pub fn rotate_colmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
 pub fn rotate_rowmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
 
     let mut rotated_data = Vec::new();
-    // let now = Instant::now();
-    for (row, col, _pixel) in input_image.iter_row_major(){
-        let pixel = input_image.get_element( input_image.height - col - 1, input_image.width - row - 1,);
-        rotated_data.push(Rgb {
-            red: pixel.red,
-            green: pixel.green,
-            blue: pixel.blue,
-        });
+    if input_image.height == input_image.width //Assume sqaure
+    {
+        // let now = Instant::now();
+        for (row, col, _pixel) in input_image.iter_row_major(){
+            let pixel = input_image.get_element( input_image.height - col - 1, input_image.width - row - 1);
+            rotated_data.push(Rgb {
+                red: pixel.red,
+                green: pixel.green,
+                blue: pixel.blue,
+            });
+        }
     }
+    else //Assume Rectangle
+    {
+        // let now = Instant::now();
+        for (row, col, _pixel) in input_image.iter_row_major(){
+            let pixel = input_image.get_element(input_image.width - row - 1, input_image.height - col - 1);
+            rotated_data.push(Rgb {
+                red: pixel.red,
+                green: pixel.green,
+                blue: pixel.blue,
+            });
+        }
+    }
+   
     // let elapsed = now.elapsed();
     // eprintln!("{:.2?}", elapsed);
     Array2::new_array(rotated_data, input_image.height, input_image.width)

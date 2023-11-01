@@ -61,26 +61,56 @@ fn main() {
         //and rotate the img according 
         match rotate {
             Some(90) => {
-                let rotated_img = rotate_rowmajor_90(&init_img);
-    
-                let rotated_image = RgbImage {
-                    width: rotated_img.width as u32,
-                    height: rotated_img.height as u32,
-                    denominator: img.denominator,
-                    pixels: rotated_img.vec_of_val,
-                };
-                rotated_image.write(None).unwrap();
+                // Some Sqaure ppm 
+                if init_img.height == init_img.width{
+                    let rotated_img = rotate_rowmajor_90(&init_img);
+                    let rotated_image = RgbImage {
+                        width: rotated_img.width as u32,
+                        height: rotated_img.height as u32,
+                        denominator: img.denominator,
+                        pixels: rotated_img.vec_of_val,
+                    };
+                    rotated_image.write(None).unwrap();
+                }
+                else // Some Rectangle ppm
+                {
+                    let rect_img = Array2::new_array(img.pixels.clone(), img.height as usize, img.width as usize);
+                    let rotated_img = rotate_rowmajor_90(&rect_img);
+
+                    let rotated_image = RgbImage {
+                        width: rotated_img.height as u32,
+                        height: rotated_img.width as u32,
+                        denominator: img.denominator,
+                        pixels: rotated_img.vec_of_val,
+                    };
+                    rotated_image.write(None).unwrap();
+                }
             }
             Some(180) => {
-                let rotated_img = rotate_rowmajor_180(&init_img);
-    
-                let rotated_image = RgbImage {
-                    width: rotated_img.width as u32,
-                    height: rotated_img.height as u32,
-                    denominator: img.denominator,
-                    pixels: rotated_img.vec_of_val,
-                };
-                rotated_image.write(None).unwrap();
+                // Some Sqaure ppm 
+                if init_img.height == init_img.width{
+                    let rotated_img = rotate_rowmajor_180(&init_img);
+                    let rotated_image = RgbImage {
+                        width: rotated_img.width as u32,
+                        height: rotated_img.height as u32,
+                        denominator: img.denominator,
+                        pixels: rotated_img.vec_of_val,
+                    };
+                    rotated_image.write(None).unwrap();
+                }
+                else // Some Rectangle ppm
+                {
+                    let rect_img = Array2::new_array(img.pixels.clone(), img.height as usize, img.width as usize);
+                    let rotated_img = rotate_rowmajor_180(&rect_img);
+
+                    let rotated_image = RgbImage {
+                        width: rotated_img.height as u32,
+                        height: rotated_img.width as u32,
+                        denominator: img.denominator,
+                        pixels: rotated_img.vec_of_val,
+                    };
+                    rotated_image.write(None).unwrap();
+                }
             }
             //The case where the another rotate degree is not supported
             _ => {

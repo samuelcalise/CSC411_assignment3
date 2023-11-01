@@ -7,7 +7,8 @@ use csc411_image::Write;
 use clap::Parser;
 use array2::Array2;
 mod thething;
-use thething::{rotate_rowmajor_90/*, rotate_colmajor_90, rotate_colmajor_180, rotate_rowmajor_180*/};
+use thething::{rotate_rowmajor_90, rotate_rowmajor_180, rotate_colmajor_90, rotate_colmajor_180};
+
 use std::process;
 //use std::time::Instant;
 
@@ -85,9 +86,8 @@ fn main() {
                     rotated_image.write(None).unwrap();
                 }
             }
-            Some(180) => {}
-                /*
-                {
+            Some(180) => {
+
                 // Some Sqaure ppm 
                 if init_img.height == init_img.width{
                     let rotated_img = rotate_rowmajor_180(&init_img);
@@ -101,20 +101,18 @@ fn main() {
                 }
                 else // Some Rectangle ppm
                 {
-                    
-                    let rect_img = Array2::new_array(img.pixels.clone(), img.height as usize, img.width as usize);
-                    let rotated_img = rotate_rowmajor_180(&rect_img);
+                    let rotated_img = rotate_rowmajor_180(&init_img);
 
                     let rotated_image = RgbImage {
-                        width: rotated_img.height as u32,
-                        height: rotated_img.width as u32,
+                        width: rotated_img.width as u32,
+                        height: rotated_img.height as u32,
                         denominator: img.denominator,
                         pixels: rotated_img.vec_of_val,
                     };
                     rotated_image.write(None).unwrap();
                 }
             }
-                */
+                
             //The case where the another rotate degree is not supported
             _ => {
                 eprintln!("Totally gahbage");
@@ -122,12 +120,9 @@ fn main() {
             }
         }
     }
-    /*
-    //When the clap args finds a 'col-major' within the command line ==> True
-    else if col_major{
-        //When clap args finds either 90 or 180, the match function will handle the certain matching case
-        //and rotate the img according
-        match rotate{
+    else //colmajor 
+    {
+        match rotate {
             Some(90) => {
                 // Some Sqaure ppm 
                 if init_img.height == init_img.width{
@@ -142,12 +137,11 @@ fn main() {
                 }
                 else // Some Rectangle ppm
                 {
-                    let rect_img = Array2::new_array(img.pixels.clone(), img.height as usize, img.width as usize);
-                    let rotated_img = rotate_colmajor_90(&rect_img);
+                    let rotated_img = rotate_colmajor_90(&init_img);
 
                     let rotated_image = RgbImage {
-                        width: rotated_img.height as u32,
-                        height: rotated_img.width as u32,
+                        width: rotated_img.width as u32,
+                        height: rotated_img.height as u32,
                         denominator: img.denominator,
                         pixels: rotated_img.vec_of_val,
                     };
@@ -155,16 +149,32 @@ fn main() {
                 }
             }
             Some(180) => {
-                let rotated_img = rotate_colmajor_180(&init_img);
-    
-                let rotated_image = RgbImage {
-                    width: rotated_img.width as u32,
-                    height: rotated_img.height as u32,
-                    denominator: img.denominator,
-                    pixels: rotated_img.vec_of_val,
-                };
-                rotated_image.write(None).unwrap();
+
+                // Some Sqaure ppm 
+                if init_img.height == init_img.width{
+                    let rotated_img = rotate_colmajor_180(&init_img);
+                    let rotated_image = RgbImage {
+                        width: rotated_img.width as u32,
+                        height: rotated_img.height as u32,
+                        denominator: img.denominator,
+                        pixels: rotated_img.vec_of_val,
+                    };
+                    rotated_image.write(None).unwrap();
+                }
+                else // Some Rectangle ppm
+                {
+                    let rotated_img = rotate_colmajor_180(&init_img);
+
+                    let rotated_image = RgbImage {
+                        width: rotated_img.width as u32,
+                        height: rotated_img.height as u32,
+                        denominator: img.denominator,
+                        pixels: rotated_img.vec_of_val,
+                    };
+                    rotated_image.write(None).unwrap();
+                }
             }
+                
             //The case where the another rotate degree is not supported
             _ => {
                 eprintln!("Totally gahbage");
@@ -172,5 +182,4 @@ fn main() {
             }
         }
     }
-    */
 }

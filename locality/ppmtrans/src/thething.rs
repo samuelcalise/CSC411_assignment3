@@ -113,6 +113,6 @@ pub fn rotate_colmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
     
     // let elapsed = now.elapsed();
     // eprintln!("{:.2?}", elapsed);
-    
+
     array
 }

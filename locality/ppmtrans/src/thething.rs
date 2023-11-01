@@ -102,12 +102,12 @@ pub fn rotate_colmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
     let mut rotated_data = vec![Rgb{red: 0,green: 0, blue: 0};input_image.width * input_image.height];
     // let now = Instant::now();
     
-    let mut array = Array2::new_array(rotated_data, input_image.height, input_image.width);
+    let mut array = Array2::new_array(rotated_data, input_image.width, input_image.height);
 
     // (w − i − 1, h − j − 1).
-    for (row, col, _pixel) in input_image.iter_row_major(){
+    for (col, row, _pixel) in input_image.iter_col_major(){
         // --> eprintln!("{},{}, {}",input_image.height, row, col);
-        let pixel = array.get_element(input_image.height - row - 1, input_image.width - col - 1);
+        let pixel = array.get_element( input_image.width - col - 1, input_image.height - row - 1);
         *pixel = _pixel.clone();
     }
     

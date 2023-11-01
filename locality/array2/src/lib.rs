@@ -13,14 +13,14 @@ impl<T> Array2<T>{
             height,
         }
     }
-
+                                                        //column, row
     pub fn iter_row_major(&self)-> impl Iterator<Item = (usize, usize, &T)>{
         self.vec_of_val
         .iter()
         .enumerate()
         .map(move |(pos, value)| (pos % self.width, pos / self.width, value))
     }
-
+                                                        //column, row
     pub fn iter_col_major(&self)-> impl Iterator<Item = (usize, usize, &T)>{
         (0..self.width).map(move|element| (element, self.vec_of_val.iter().skip(element)))
         .flat_map(move |(element,col)| {
@@ -30,8 +30,8 @@ impl<T> Array2<T>{
         })
     }
 
-    pub fn get_element(&self, _row: usize, _col: usize)  -> &T{
-        &self.vec_of_val[(_row * self.height + _col) as usize]
+    pub fn get_element(& mut self, _col: usize, _row: usize)  -> & mut T{
+        &mut self.vec_of_val[(_row * self.width + _col) as usize]
     }
 
 }

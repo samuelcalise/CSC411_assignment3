@@ -7,7 +7,7 @@ use csc411_image::Write;
 use clap::Parser;
 use array2::Array2;
 mod thething;
-use thething::{rotate_colmajor_90, rotate_rowmajor_90, rotate_colmajor_180, rotate_rowmajor_180};
+use thething::{rotate_rowmajor_90/*, rotate_colmajor_90, rotate_colmajor_180, rotate_rowmajor_180*/};
 use std::process;
 //use std::time::Instant;
 
@@ -34,7 +34,7 @@ struct Args {
 
 }
 
-//cargo run -- --rotate 180 --col-major ./f_original.ppm > here.ppm
+//cargo run -- --rotate 90 --col-major ./moss.ppm > here.ppm
 /*
     Main Function:
         Intended to use clap command line structure to call the expended function to
@@ -74,19 +74,20 @@ fn main() {
                 }
                 else // Some Rectangle ppm
                 {
-                    let rect_img = Array2::new_array(img.pixels.clone(), img.height as usize, img.width as usize);
-                    let rotated_img = rotate_rowmajor_90(&rect_img);
+                    let rotated_img = rotate_rowmajor_90(&init_img);
 
                     let rotated_image = RgbImage {
-                        width: rotated_img.height as u32,
-                        height: rotated_img.width as u32,
+                        width: rotated_img.width as u32,
+                        height: rotated_img.height as u32,
                         denominator: img.denominator,
                         pixels: rotated_img.vec_of_val,
                     };
                     rotated_image.write(None).unwrap();
                 }
             }
-            Some(180) => {
+            Some(180) => {}
+                /*
+                {
                 // Some Sqaure ppm 
                 if init_img.height == init_img.width{
                     let rotated_img = rotate_rowmajor_180(&init_img);
@@ -100,6 +101,7 @@ fn main() {
                 }
                 else // Some Rectangle ppm
                 {
+                    
                     let rect_img = Array2::new_array(img.pixels.clone(), img.height as usize, img.width as usize);
                     let rotated_img = rotate_rowmajor_180(&rect_img);
 
@@ -112,6 +114,7 @@ fn main() {
                     rotated_image.write(None).unwrap();
                 }
             }
+                */
             //The case where the another rotate degree is not supported
             _ => {
                 eprintln!("Totally gahbage");
@@ -119,6 +122,7 @@ fn main() {
             }
         }
     }
+    /*
     //When the clap args finds a 'col-major' within the command line ==> True
     else if col_major{
         //When clap args finds either 90 or 180, the match function will handle the certain matching case
@@ -168,4 +172,5 @@ fn main() {
             }
         }
     }
+    */
 }

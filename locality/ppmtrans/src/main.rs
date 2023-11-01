@@ -35,7 +35,10 @@ struct Args {
 
 }
 
-//cargo run -- --rotate 90 --col-major ./moss.ppm > here.ppm
+//cargo run -- --rotate 90 --row-major ./moss.ppm > final90mossrowmajor.ppm
+//cargo run -- --rotate 90 --col-major ./moss.ppm > final90mosscolmajor.ppm
+//cargo run -- --rotate 180 --row-major ./moss.ppm > final180mossrowmajor.ppm
+//cargo run -- --rotate 180 --col-major ./moss.ppm > final180mosscolmajor.ppm
 /*
     Main Function:
         Intended to use clap command line structure to call the expended function to

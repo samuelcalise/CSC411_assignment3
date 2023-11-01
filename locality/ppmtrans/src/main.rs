@@ -120,7 +120,7 @@ fn main() {
             }
         }
     }
-    else //colmajor 
+    else if col_major //colmajor 
     {
         match rotate {
             Some(90) => {

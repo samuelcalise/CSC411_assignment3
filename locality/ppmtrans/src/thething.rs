@@ -13,7 +13,7 @@ use csc411_image::Rgb;
 /// the function will return an `array2<Rgb>` which is the expected rotated
 /// image for 90 degrees clockwise rotation in row_major iteration.
 pub fn rotate_rowmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
-    let mut rotated_data = vec![Rgb{red: 0,green: 0, blue: 0};input_image.width * input_image.height];
+    let rotated_data = vec![Rgb{red: 0,green: 0, blue: 0};input_image.width * input_image.height];
     // let now = Instant::now();
     
     let mut array = Array2::new_array(rotated_data, input_image.height, input_image.width);
@@ -41,7 +41,7 @@ pub fn rotate_rowmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
 /// image for 180 degrees clockwise rotation in row_major iteration.
 pub fn rotate_rowmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
 
-    let mut rotated_data = vec![Rgb{red: 0,green: 0, blue: 0};input_image.width * input_image.height];
+    let rotated_data = vec![Rgb{red: 0,green: 0, blue: 0};input_image.width * input_image.height];
     // let now = Instant::now();
     
     let mut array = Array2::new_array(rotated_data, input_image.width, input_image.height);
@@ -70,7 +70,7 @@ pub fn rotate_rowmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
 /// image for 90 degrees clockwise rotation in col_major iteration.
 pub fn rotate_colmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
     
-    let mut rotated_data = vec![Rgb{red: 0,green: 0, blue: 0};input_image.width * input_image.height];
+    let rotated_data = vec![Rgb{red: 0,green: 0, blue: 0};input_image.width * input_image.height];
     // let now = Instant::now();
     
     let mut array = Array2::new_array(rotated_data, input_image.height, input_image.width);
@@ -99,7 +99,7 @@ pub fn rotate_colmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
 /// image for 180 degrees clockwise rotation in col_major iteration.
 pub fn rotate_colmajor_180(input_image: &Array2<Rgb>) -> Array2<Rgb> {
     
-    let mut rotated_data = vec![Rgb{red: 0,green: 0, blue: 0};input_image.width * input_image.height];
+    let rotated_data = vec![Rgb{red: 0,green: 0, blue: 0};input_image.width * input_image.height];
     // let now = Instant::now();
     
     let mut array = Array2::new_array(rotated_data, input_image.width, input_image.height);

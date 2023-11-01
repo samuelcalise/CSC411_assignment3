@@ -16,14 +16,30 @@ pub fn rotate_colmajor_90(input_image: &Array2<Rgb>) -> Array2<Rgb> {
     let mut rotated_data = Vec::new();
     
     // let now = Instant::now();
-    for (col, row, _pixel) in input_image.iter_col_major(){
-        let pixel = input_image.get_element(input_image.height - row - 1, col);
-        rotated_data.push(Rgb {
-            red: pixel.red,
-            green: pixel.green,
-            blue: pixel.blue,
-        });
+
+    if input_image.height == input_image.width //Assume sqaure
+    {
+        for (col, row, _pixel) in input_image.iter_col_major(){
+            let pixel = input_image.get_element(input_image.height - row - 1, col);
+            rotated_data.push(Rgb {
+                red: pixel.red,
+                green: pixel.green,
+                blue: pixel.blue,
+            });
+        }
     }
+    else // Assume rectangle
+    {
+        for (col, row, _pixel) in input_image.iter_col_major(){
+            let pixel = input_image.get_element(col, input_image.height - row - 1);
+            rotated_data.push(Rgb {
+                red: pixel.red,
+                green: pixel.green,
+                blue: pixel.blue,
+            });
+        }
+    }
+    
     // let elapsed = now.elapsed();
     // eprintln!("{:.2?}", elapsed);
 

@@ -50,15 +50,15 @@
             height,
         }
     }
-
-    <span class="kw">pub fn </span>iter_row_major(<span class="kw-2">&amp;</span><span class="self">self</span>)-&gt; <span class="kw">impl </span>Iterator&lt;Item = (usize, usize, <span class="kw-2">&amp;</span>T)&gt;{
+                                                        <span class="comment">//column, row
+    </span><span class="kw">pub fn </span>iter_row_major(<span class="kw-2">&amp;</span><span class="self">self</span>)-&gt; <span class="kw">impl </span>Iterator&lt;Item = (usize, usize, <span class="kw-2">&amp;</span>T)&gt;{
         <span class="self">self</span>.vec_of_val
         .iter()
         .enumerate()
         .map(<span class="kw">move </span>|(pos, value)| (pos % <span class="self">self</span>.width, pos / <span class="self">self</span>.width, value))
     }
-
-    <span class="kw">pub fn </span>iter_col_major(<span class="kw-2">&amp;</span><span class="self">self</span>)-&gt; <span class="kw">impl </span>Iterator&lt;Item = (usize, usize, <span class="kw-2">&amp;</span>T)&gt;{
+                                                        <span class="comment">//column, row
+    </span><span class="kw">pub fn </span>iter_col_major(<span class="kw-2">&amp;</span><span class="self">self</span>)-&gt; <span class="kw">impl </span>Iterator&lt;Item = (usize, usize, <span class="kw-2">&amp;</span>T)&gt;{
         (<span class="number">0</span>..<span class="self">self</span>.width).map(<span class="kw">move</span>|element| (element, <span class="self">self</span>.vec_of_val.iter().skip(element)))
         .flat_map(<span class="kw">move </span>|(element,col)| {
             col.step_by(<span class="self">self</span>.width)
@@ -67,8 +67,8 @@
         })
     }
 
-    <span class="kw">pub fn </span>get_element(<span class="kw-2">&amp;</span><span class="self">self</span>, _row: usize, _col: usize)  -&gt; <span class="kw-2">&amp;</span>T{
-        <span class="kw-2">&amp;</span><span class="self">self</span>.vec_of_val[(_row * <span class="self">self</span>.height + _col) <span class="kw">as </span>usize]
+    <span class="kw">pub fn </span>get_element(&amp; <span class="kw-2">mut </span><span class="self">self</span>, _col: usize, _row: usize)  -&gt; &amp; <span class="kw-2">mut </span>T{
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>.vec_of_val[(_row * <span class="self">self</span>.width + _col) <span class="kw">as </span>usize]
     }
 
 }</code></pre></div></section></main></body></html>

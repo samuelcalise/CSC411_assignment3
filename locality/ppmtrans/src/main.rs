@@ -35,14 +35,16 @@ struct Args {
 
 }
 
-//cargo run -- --rotate 90 --row-major ./moss.ppm > final90mossrowmajor.ppm
-//cargo run -- --rotate 90 --col-major ./moss.ppm > final90mosscolmajor.ppm
-//cargo run -- --rotate 180 --row-major ./moss.ppm > final180mossrowmajor.ppm
-//cargo run -- --rotate 180 --col-major ./moss.ppm > final180mosscolmajor.ppm
 /*
     Main Function:
         Intended to use clap command line structure to call the expended function to
         rotate an ppm image to a new rotated ppm image.
+
+    Runtime Commands:
+    //cargo run -- --rotate 90 --row-major ./moss.ppm > final90mossrowmajor.ppm
+    //cargo run -- --rotate 90 --col-major ./moss.ppm > final90mosscolmajor.ppm
+    //cargo run -- --rotate 180 --row-major ./moss.ppm > final180mossrowmajor.ppm
+    //cargo run -- --rotate 180 --col-major ./moss.ppm > final180mosscolmajor.ppm
 */
 fn main() {
 
@@ -64,6 +66,7 @@ fn main() {
         //When clap args finds either 90 or 180, the match function will handle the certain matching case
         //and rotate the img according 
         match rotate {
+            //When clap recognizes the command for a 90 degree clockwise rotation
             Some(90) => {
                 // Some Sqaure ppm 
                 if init_img.height == init_img.width{
@@ -89,8 +92,8 @@ fn main() {
                     rotated_image.write(None).unwrap();
                 }
             }
+            //When clap recognizes the command for a 180 degree clockwise rotation
             Some(180) => {
-
                 // Some Sqaure ppm 
                 if init_img.height == init_img.width{
                     let rotated_img = rotate_rowmajor_180(&init_img);
@@ -115,7 +118,6 @@ fn main() {
                     rotated_image.write(None).unwrap();
                 }
             }
-                
             //The case where the another rotate degree is not supported
             _ => {
                 eprintln!("Totally gahbage");
@@ -123,9 +125,13 @@ fn main() {
             }
         }
     }
-    else if col_major //colmajor 
+    //When the clap args finds a 'col-major' within the command line ==> True
+    else if col_major
     {
+        //When clap args finds either 90 or 180, the match function will handle the certain matching case
+        //and rotate the img according 
         match rotate {
+            //When clap recognizes the command for a 90 degree clockwise rotation
             Some(90) => {
                 // Some Sqaure ppm 
                 if init_img.height == init_img.width{
@@ -151,8 +157,8 @@ fn main() {
                     rotated_image.write(None).unwrap();
                 }
             }
+            //When clap recognizes the command for a 180 degree clockwise rotation
             Some(180) => {
-
                 // Some Sqaure ppm 
                 if init_img.height == init_img.width{
                     let rotated_img = rotate_colmajor_180(&init_img);
@@ -176,8 +182,7 @@ fn main() {
                     };
                     rotated_image.write(None).unwrap();
                 }
-            }
-                
+            }  
             //The case where the another rotate degree is not supported
             _ => {
                 eprintln!("Totally gahbage");
